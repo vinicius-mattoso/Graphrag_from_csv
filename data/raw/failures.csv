@@ -1,0 +1,6 @@
+failure_code,failure_name,symptom,root_cause,recommended_action,severity
+F-SUPERAQUECIMENTO,Superaquecimento,Temperatura acima da faixa nominal,Lubrificacao insuficiente ou atrito excessivo,Inspecionar lubrificacao alinhamento e componentes de vedacao,Alta
+F-VIBRACAO,Vibracao elevada,Vibracao acima do limite operacional,Desalinhamento desgaste ou folga mecanica,Verificar alinhamento rolamentos e base de fixacao,Media
+F-QUEDA_PRESSAO,Queda de pressao,Pressao de saida abaixo do limite,Filtro saturado valvula desgastada ou vazamento,Substituir filtro e verificar vedacoes,Alta
+F-RUIDO_ROLAMENTO,Ruido em rolamento,Ruido metalico continuo,Rolamento contaminado ou fim de vida,Substituir rolamento e limpar alojamento,Media
+F-TROCA_TERMICA_BAIXA,Baixa troca termica,Diferencial termico reduzido,Incrustacao ou obstrucao interna,Programar limpeza quimica e verificar vazao,Alta

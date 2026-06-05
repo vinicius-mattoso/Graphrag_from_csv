@@ -1,0 +1,7 @@
+part_id,part_name,category,compatible_asset_class,criticality,lead_time_days,unit_cost
+P-001,Selo mecanico 32mm,Vedacao,BOMBA_CENTRIFUGA,Alta,14,650.00
+P-002,Rolamento 6312,Rolamento,BOMBA_CENTRIFUGA;TRANSPORTADOR_CORREIA,Alta,10,210.00
+P-003,Filtro coalescente 1pol,Filtragem,COMPRESSOR_AR,Alta,21,320.00
+P-004,Correia transportadora 800mm,Transmissao,TRANSPORTADOR_CORREIA,Media,30,1900.00
+P-005,Jogo de juntas EPDM,Vedacao,TROCADOR_CALOR;BOMBA_CENTRIFUGA,Alta,18,480.00
+P-006,Valvula retencao DN50,Valvula,COMPRESSOR_AR;BOMBA_CENTRIFUGA,Alta,25,780.00

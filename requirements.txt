@@ -1,0 +1,18 @@
+# Core LangChain stack
+langchain
+langchain-core
+langchain-openai
+
+# Local vector store + GraphRAG traversal
+langchain-chroma
+langchain-graph-retriever[chroma]
+
+# OpenAI embeddings/tokenization helpers
+tiktoken
+
+# Environment and data utilities
+python-dotenv
+pandas
+
+# Tests
+pytest

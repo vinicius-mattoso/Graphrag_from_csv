@@ -1,0 +1,6 @@
+asset_id,name,asset_class,location,criticality,manufacturer,commissioned_at
+A-100,Bomba centrifuga 01,BOMBA_CENTRIFUGA,Planta Sul / Linha 1,Alta,KSB,2021-02-15
+A-101,Bomba centrifuga 02,BOMBA_CENTRIFUGA,Planta Sul / Linha 2,Alta,KSB,2021-03-10
+A-200,Compressor de ar 01,COMPRESSOR_AR,Utilidades / Sala 3,Critica,Atlas Copco,2020-11-05
+A-300,Transportador de correia 01,TRANSPORTADOR_CORREIA,Expedicao / Docas,Media,SEW,2019-08-20
+A-400,Trocador de calor 01,TROCADOR_CALOR,Planta Norte / Reator 2,Alta,Alfa Laval,2022-01-18

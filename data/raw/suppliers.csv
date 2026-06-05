@@ -1,0 +1,7 @@
+supplier_id,supplier_name,part_id,preferred,average_delivery_days,reliability_score
+S-001,Fornecedor Alpha,P-001,true,12,0.92
+S-002,Fornecedor Beta,P-002,true,8,0.88
+S-003,Fornecedor Gamma,P-003,true,18,0.81
+S-004,Fornecedor Delta,P-004,false,28,0.74
+S-005,Fornecedor Alpha,P-005,true,15,0.92
+S-006,Fornecedor Omega,P-006,false,24,0.69

@@ -1,0 +1,7 @@
+work_order_id,asset_id,opened_at,closed_at,maintenance_type,failure_code,status,downtime_hours,description
+WO-1001,A-100,2025-04-08,2025-04-09,Corretiva,F-SUPERAQUECIMENTO,Fechada,8.5,Motor com temperatura elevada e vazamento no selo mecanico
+WO-1002,A-101,2025-05-12,2025-05-12,Preventiva,F-VIBRACAO,Fechada,3.0,Vibracao acima do limite e alinhamento revisado
+WO-1003,A-200,2025-06-03,2025-06-04,Corretiva,F-QUEDA_PRESSAO,Fechada,12.0,Queda de pressao com filtro saturado e valvula com desgaste
+WO-1004,A-300,2025-07-15,2025-07-16,Corretiva,F-RUIDO_ROLAMENTO,Fechada,5.5,Ruido no mancal e aquecimento do rolamento
+WO-1005,A-400,2025-08-22,,Preditiva,F-TROCA_TERMICA_BAIXA,Aberta,0.0,Eficiencia termica baixa com incrustacao provavel
+WO-1006,A-100,2025-09-10,2025-09-11,Corretiva,F-VIBRACAO,Fechada,6.0,Vibracao recorrente depois de partida e acoplamento revisado

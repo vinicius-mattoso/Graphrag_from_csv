@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local GraphRAG artifacts
+data/processed/method_01/chroma/

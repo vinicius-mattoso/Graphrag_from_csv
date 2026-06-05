@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Fluxo GraphRAG local com LangChain</title>
+  <desc id="desc">Diagrama mostrando os passos desde ingestao dos CSVs ate perguntas e respostas com LLM.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .band { fill: #eef2ff; stroke: #c7d2fe; stroke-width: 1.5; }
+      .band2 { fill: #ecfdf5; stroke: #bbf7d0; stroke-width: 1.5; }
+      .band3 { fill: #fff7ed; stroke: #fed7aa; stroke-width: 1.5; }
+      .box { fill: #ffffff; stroke: #334155; stroke-width: 1.6; rx: 8; }
+      .box-blue { fill: #eff6ff; stroke: #2563eb; stroke-width: 1.8; rx: 8; }
+      .box-green { fill: #f0fdf4; stroke: #16a34a; stroke-width: 1.8; rx: 8; }
+      .box-orange { fill: #fff7ed; stroke: #ea580c; stroke-width: 1.8; rx: 8; }
+      .box-purple { fill: #faf5ff; stroke: #7e22ce; stroke-width: 1.8; rx: 8; }
+      .box-gray { fill: #f1f5f9; stroke: #475569; stroke-width: 1.6; rx: 8; }
+      .db { fill: #fefce8; stroke: #ca8a04; stroke-width: 1.8; }
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 16px Arial, sans-serif; fill: #475569; }
+      .section { font: 700 16px Arial, sans-serif; fill: #1e293b; }
+      .label { font: 700 15px Arial, sans-serif; fill: #0f172a; }
+      .text { font: 400 13px Arial, sans-serif; fill: #334155; }
+      .small { font: 400 12px Arial, sans-serif; fill: #475569; }
+      .code { font: 600 12px Consolas, monospace; fill: #1e293b; }
+      .arrow { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .arrow-soft { stroke: #64748b; stroke-width: 1.8; fill: none; marker-end: url(#arrowhead-soft); stroke-dasharray: 6 5; }
+      .trace { stroke: #7e22ce; stroke-width: 1.7; fill: none; marker-end: url(#arrowhead-purple); stroke-dasharray: 4 5; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#334155" />
+    </marker>
+    <marker id="arrowhead-soft" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#64748b" />
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#7e22ce" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="980" />
+
+  <text class="title" x="70" y="62">Metodo 01 - GraphRAG local com LangChain</text>
+  <text class="subtitle" x="70" y="91">Da ingestao dos CSVs ate Q&amp;A com recuperacao vetorial, travessia por grafo e resposta da LLM.</text>
+
+  <rect class="band" x="50" y="125" width="1500" height="255" rx="16" />
+  <text class="section" x="74" y="155">1. Indexacao: CSV -&gt; Ontologia -&gt; Grafo -&gt; Documentos</text>
+
+  <rect class="band2" x="50" y="405" width="1500" height="230" rx="16" />
+  <text class="section" x="74" y="435">2. Vector storage: Documentos -&gt; Embeddings -&gt; Chroma local</text>
+
+  <rect class="band3" x="50" y="660" width="1500" height="250" rx="16" />
+  <text class="section" x="74" y="690">3. Q&amp;A: Pergunta -&gt; GraphRetriever -&gt; Contexto -&gt; LLM -&gt; Resposta</text>
+
+  <!-- Ingestion row -->
+  <rect class="box-blue" x="80" y="190" width="210" height="128" />
+  <text class="label" x="105" y="218">data/raw/*.csv</text>
+  <text class="small" x="105" y="243">assets.csv</text>
+  <text class="small" x="105" y="262">failures.csv</text>
+  <text class="small" x="105" y="281">parts/inventory/suppliers</text>
+  <text class="small" x="105" y="300">work_orders.csv</text>
+
+  <rect class="box" x="350" y="190" width="215" height="128" />
+  <text class="label" x="378" y="220">script_ingestion.py</text>
+  <text class="text" x="378" y="247">orquestra ingestao</text>
+  <text class="code" x="378" y="273">--skip-vector-store</text>
+  <text class="small" x="378" y="297">gera JSONL ou indice completo</text>
+
+  <rect class="box-purple" x="630" y="165" width="220" height="105" />
+  <text class="label" x="660" y="196">ontology.py</text>
+  <text class="text" x="660" y="223">NodeSpec</text>
+  <text class="text" x="660" y="244">RelationshipSpec</text>
+
+  <rect class="box-green" x="630" y="290" width="220" height="105" />
+  <text class="label" x="660" y="321">graph_builder.py</text>
+  <text class="text" x="660" y="348">valida integridade</text>
+  <text class="text" x="660" y="369">cria grafo e documentos</text>
+
+  <rect class="box-gray" x="920" y="190" width="260" height="128" />
+  <text class="label" x="948" y="220">Artefatos JSONL</text>
+  <text class="code" x="948" y="247">graph_nodes.jsonl</text>
+  <text class="code" x="948" y="270">graph_edges.jsonl</text>
+  <text class="code" x="948" y="293">documents.jsonl</text>
+
+  <rect class="box" x="1240" y="190" width="235" height="128" />
+  <text class="label" x="1272" y="220">script_inspection.py</text>
+  <text class="text" x="1272" y="247">audita artefatos</text>
+  <text class="text" x="1272" y="270">conta nos e arestas</text>
+  <text class="text" x="1272" y="293">mostra amostras</text>
+
+  <path class="arrow" d="M290 254 H350" />
+  <path class="arrow" d="M565 232 H630" />
+  <path class="arrow" d="M565 276 C590 276 598 342 630 342" />
+  <path class="arrow" d="M850 342 C884 342 884 254 920 254" />
+  <path class="arrow-soft" d="M1180 254 H1240" />
+
+  <!-- Vector storage row -->
+  <rect class="box-gray" x="105" y="485" width="235" height="96" />
+  <text class="label" x="132" y="516">documents.jsonl</text>
+  <text class="text" x="132" y="543">texto + metadados</text>
+  <text class="small" x="132" y="565">doc_id, asset_class, part_id...</text>
+
+  <rect class="box-green" x="415" y="485" width="245" height="96" />
+  <text class="label" x="444" y="516">vector_store.py</text>
+  <text class="text" x="444" y="543">Document + shredding</text>
+  <text class="text" x="444" y="565">prepara para GraphRetriever</text>
+
+  <rect class="box-purple" x="735" y="485" width="245" height="96" />
+  <text class="label" x="762" y="516">OpenAIEmbeddings</text>
+  <text class="code" x="762" y="543">text-embedding-3-small</text>
+  <text class="small" x="762" y="565">configurado no .env</text>
+
+  <path class="db" d="M1075 503 C1075 478 1350 478 1350 503 L1350 570 C1350 595 1075 595 1075 570 Z" />
+  <ellipse class="db" cx="1212.5" cy="503" rx="137.5" ry="25" />
+  <text class="label" x="1165" y="536">Chroma local</text>
+  <text class="code" x="1120" y="562">data/processed/method_01/chroma/</text>
+
+  <path class="arrow" d="M340 533 H415" />
+  <path class="arrow" d="M660 533 H735" />
+  <path class="arrow" d="M980 533 H1075" />
+  <path class="arrow-soft" d="M1050 318 C1050 405 220 405 220 485" />
+
+  <!-- QA row -->
+  <rect class="box-blue" x="80" y="745" width="220" height="108" />
+  <text class="label" x="118" y="776">Usuario</text>
+  <text class="text" x="118" y="804">faz uma pergunta</text>
+  <text class="small" x="118" y="827">ex.: pecas para queda de pressao</text>
+
+  <rect class="box" x="365" y="745" width="220" height="108" />
+  <text class="label" x="398" y="776">script_ask.py</text>
+  <text class="text" x="398" y="804">carrega Chroma</text>
+  <text class="text" x="398" y="827">monta retriever e prompt</text>
+
+  <rect class="box-orange" x="650" y="728" width="260" height="142" />
+  <text class="label" x="684" y="759">GraphRetriever</text>
+  <text class="text" x="684" y="786">1. similaridade vetorial</text>
+  <text class="text" x="684" y="809">2. travessia por metadados</text>
+  <text class="code" x="684" y="835">asset_class, asset_id,</text>
+  <text class="code" x="684" y="855">failure_code, part_id</text>
+
+  <rect class="box-gray" x="975" y="745" width="205" height="108" />
+  <text class="label" x="1016" y="776">Contexto</text>
+  <text class="text" x="1016" y="804">docs recuperados</text>
+  <text class="text" x="1016" y="827">com fontes e metadados</text>
+
+  <rect class="box-purple" x="1245" y="745" width="220" height="108" />
+  <text class="label" x="1292" y="776">ChatOpenAI</text>
+  <text class="text" x="1292" y="804">gera resposta</text>
+  <text class="small" x="1292" y="827">usando apenas o contexto</text>
+
+  <rect class="box-green" x="1245" y="900" width="220" height="48" />
+  <text class="label" x="1284" y="930">Resposta + fontes</text>
+
+  <path class="arrow" d="M300 799 H365" />
+  <path class="arrow" d="M585 799 H650" />
+  <path class="arrow" d="M910 799 H975" />
+  <path class="arrow" d="M1180 799 H1245" />
+  <path class="arrow" d="M1355 853 V900" />
+
+  <path class="arrow-soft" d="M1212 581 C1212 678 780 650 780 728" />
+  <path class="arrow-soft" d="M1212 581 C1212 695 475 690 475 745" />
+
+  <!-- Cross-cutting configuration/tracing -->
+  <rect class="box-purple" x="80" y="910" width="930" height="48" />
+  <text class="label" x="108" y="940">LangSmith tracing + .env</text>
+  <text class="small" x="318" y="940">configure_langsmith() em ingestion, inspection e ask; modelos e chaves via OPENAI_* e LANGSMITH_*</text>
+
+  <path class="trace" d="M545 910 C490 880 470 858 475 853" />
+  <path class="trace" d="M545 910 C470 790 470 320 457 318" />
+  <path class="trace" d="M545 910 C1015 850 1360 850 1355 853" />
+</svg>
