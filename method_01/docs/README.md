@@ -16,6 +16,11 @@ Esta pasta explica como cada script participa da arquitetura GraphRAG local.
 - [script_ask.md](script_ask.md): consulta a base GraphRAG.
 - [script_inspection.md](script_inspection.md): audita os artefatos gerados.
 
+## Interface local
+
+O app Streamlit fica em `app_method_01` e permite explorar ingestao, grafo,
+documentos e Q&A em uma interface multipage.
+
 ## Relacao com GraphRAG
 
 Nesta v1, "Graph" e "RAG" aparecem em camadas separadas:

@@ -49,3 +49,9 @@ Pergunte ao GraphRAG:
 ```powershell
 python -m method_01.script_ask "quais pecas podem ajudar em queda de pressao no compressor?"
 ```
+
+Explore pelo app Streamlit:
+
+```powershell
+streamlit run app_method_01/Home.py
+```
