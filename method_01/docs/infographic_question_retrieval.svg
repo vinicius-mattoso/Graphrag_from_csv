@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Infografico da recuperacao de subgrafo para pergunta operacional</title>
+  <desc id="desc">Exemplo de pergunta sobre queda de pressao no compressor, mostrando documentos recuperados, expansao por subgrafo e resposta final.</desc>
+  <defs>
+    <style>
+      .bg { fill: #fbfaf7; }
+      .title { font: 700 41px Arial, sans-serif; fill: #111827; }
+      .subtitle { font: 400 20px Arial, sans-serif; fill: #4b5563; }
+      .eyebrow { font: 700 12px Arial, sans-serif; fill: #64748b; letter-spacing: 1.8px; }
+      .h2 { font: 700 24px Arial, sans-serif; fill: #111827; }
+      .h3 { font: 700 17px Arial, sans-serif; fill: #111827; }
+      .txt { font: 400 15px Arial, sans-serif; fill: #374151; }
+      .small { font: 400 13px Arial, sans-serif; fill: #64748b; }
+      .micro { font: 700 11px Arial, sans-serif; fill: #334155; }
+      .card { fill: #ffffff; stroke: #e5e7eb; stroke-width: 1.4; }
+      .blue { fill: #eff6ff; stroke: #bfdbfe; stroke-width: 1.6; }
+      .green { fill: #ecfdf5; stroke: #bbf7d0; stroke-width: 1.6; }
+      .orange { fill: #fff7ed; stroke: #fed7aa; stroke-width: 1.6; }
+      .red { fill: #fef2f2; stroke: #fecaca; stroke-width: 1.6; }
+      .gray { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1.4; }
+      .line { stroke: #94a3b8; stroke-width: 2.1; fill: none; marker-end: url(#arrow); }
+      .line-blue { stroke: #2563eb; stroke-width: 2.3; fill: none; marker-end: url(#arrow-blue); }
+      .line-green { stroke: #16a34a; stroke-width: 2.3; fill: none; marker-end: url(#arrow-green); }
+      .line-orange { stroke: #ea580c; stroke-width: 2.3; fill: none; marker-end: url(#arrow-orange); }
+      .dash { stroke: #cbd5e1; stroke-width: 1.8; fill: none; stroke-dasharray: 5 7; }
+    </style>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.09"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#ea580c"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="900"/>
+
+  <text class="eyebrow" x="80" y="70">EXEMPLO REAL DO METHOD 01</text>
+  <text class="title" x="80" y="124">Como o subgrafo sustenta a resposta</text>
+  <text class="subtitle" x="80" y="160">Pergunta: quais pecas podem ajudar em queda de pressao no compressor?</text>
+
+  <rect class="card" x="80" y="215" width="310" height="500" rx="26" filter="url(#shadow)"/>
+  <text class="eyebrow" x="115" y="255">1. PERGUNTA</text>
+  <text class="h2" x="115" y="295">Intencao operacional</text>
+  <text class="txt" x="115" y="333">O usuario descreve uma</text>
+  <text class="txt" x="115" y="357">situacao de manutencao,</text>
+  <text class="txt" x="115" y="381">sem informar IDs.</text>
+  <rect class="blue" x="115" y="430" width="240" height="90" rx="18"/>
+  <text class="h3" x="140" y="465">"queda de pressao</text>
+  <text class="h3" x="140" y="490">no compressor"</text>
+  <text class="small" x="140" y="515">linguagem natural</text>
+  <rect class="gray" x="115" y="560" width="240" height="86" rx="18"/>
+  <text class="small" x="140" y="590">Sem Cypher.</text>
+  <text class="small" x="140" y="614">Sem ID tecnico.</text>
+  <text class="small" x="140" y="638">Sem filtro manual.</text>
+
+  <rect class="blue" x="455" y="215" width="315" height="500" rx="26" filter="url(#shadow)"/>
+  <text class="eyebrow" x="490" y="255">2. SINAIS VETORIAIS</text>
+  <text class="h2" x="490" y="295">Primeiros candidatos</text>
+  <text class="txt" x="490" y="333">A busca semantica encontra</text>
+  <text class="txt" x="490" y="357">documentos parecidos com</text>
+  <text class="txt" x="490" y="381">a pergunta.</text>
+
+  <rect class="card" x="490" y="420" width="245" height="54" rx="14"/>
+  <text class="micro" x="512" y="443">P-006 | Valvula retencao</text>
+  <text class="small" x="512" y="462">depth 0 | classe COMPRESSOR_AR</text>
+
+  <rect class="card" x="490" y="490" width="245" height="54" rx="14"/>
+  <text class="micro" x="512" y="513">F-QUEDA_PRESSAO</text>
+  <text class="small" x="512" y="532">depth 0 | falha de pressao</text>
+
+  <rect class="gray" x="490" y="560" width="245" height="54" rx="14"/>
+  <text class="micro" x="512" y="583">P-001, P-005, P-002</text>
+  <text class="small" x="512" y="602">sinais proximos, mas outra classe</text>
+
+  <text class="small" x="490" y="660">Nesta etapa ainda ha ruido.</text>
+
+  <rect class="green" x="835" y="215" width="360" height="500" rx="26" filter="url(#shadow)"/>
+  <text class="eyebrow" x="870" y="255">3. EXPANSAO PELO GRAFO</text>
+  <text class="h2" x="870" y="295">Subgrafo relevante</text>
+  <text class="txt" x="870" y="333">O GraphRetriever atravessa</text>
+  <text class="txt" x="870" y="357">metadados compartilhados</text>
+  <text class="txt" x="870" y="381">para reduzir ruido.</text>
+
+  <rect class="card" x="890" y="428" width="135" height="58" rx="15"/>
+  <text class="micro" x="915" y="451">Falha</text>
+  <text class="small" x="907" y="470">F-QUEDA</text>
+
+  <rect class="card" x="1060" y="428" width="100" height="58" rx="15"/>
+  <text class="micro" x="1085" y="451">Classe</text>
+  <text class="small" x="1073" y="470">COMP_AR</text>
+
+  <rect class="card" x="890" y="535" width="135" height="58" rx="15"/>
+  <text class="micro" x="913" y="558">Ordem</text>
+  <text class="small" x="915" y="577">WO-1003</text>
+
+  <rect class="card" x="1060" y="535" width="100" height="58" rx="15"/>
+  <text class="micro" x="1088" y="558">Ativo</text>
+  <text class="small" x="1088" y="577">A-200</text>
+
+  <rect class="orange" x="940" y="628" width="170" height="58" rx="15"/>
+  <text class="micro" x="978" y="651">Pecas</text>
+  <text class="small" x="962" y="670">P-006 + P-003</text>
+
+  <path class="line-green" d="M1025 457 H1060"/>
+  <path class="line-green" d="M957 486 V535"/>
+  <path class="line-green" d="M1110 486 V535"/>
+  <path class="line-green" d="M1025 564 H1060"/>
+  <path class="line-green" d="M957 593 C957 615 1000 615 1000 628"/>
+  <path class="line-green" d="M1110 593 C1110 615 1065 615 1065 628"/>
+
+  <rect class="card" x="1245" y="215" width="275" height="500" rx="26" filter="url(#shadow)"/>
+  <text class="eyebrow" x="1280" y="255">4. RESPOSTA FINAL</text>
+  <text class="h2" x="1280" y="295">Baseada em fontes</text>
+  <text class="txt" x="1280" y="333">A LLM sintetiza apenas</text>
+  <text class="txt" x="1280" y="357">o contexto conectado.</text>
+
+  <rect class="orange" x="1280" y="410" width="205" height="92" rx="18"/>
+  <text class="h3" x="1305" y="442">P-006</text>
+  <text class="txt" x="1305" y="466">Valvula retencao DN50</text>
+  <text class="small" x="1305" y="488">estoque 0 | minimo 2</text>
+
+  <rect class="orange" x="1280" y="525" width="205" height="92" rx="18"/>
+  <text class="h3" x="1305" y="557">P-003</text>
+  <text class="txt" x="1305" y="581">Filtro coalescente 1pol</text>
+  <text class="small" x="1305" y="603">estoque 1 | minimo 3</text>
+
+  <rect class="gray" x="1280" y="645" width="205" height="48" rx="18"/>
+  <text class="small" x="1305" y="674">Fontes: parts, failures,</text>
+  <text class="small" x="1305" y="690">assets e work_orders</text>
+
+  <path class="line-blue" d="M390 465 H455"/>
+  <path class="line-green" d="M770 465 H835"/>
+  <path class="line-orange" d="M1195 465 H1245"/>
+
+  <path class="dash" d="M615 614 C670 755 1000 755 1030 686"/>
+  <text class="small" x="650" y="766">A expansao pelo grafo traz P-003 e WO-1003 mesmo quando nao sao os primeiros sinais.</text>
+
+  <rect class="card" x="150" y="785" width="1300" height="58" rx="22"/>
+  <text class="h3" x="190" y="821">Mensagem executiva:</text>
+  <text class="txt" x="380" y="821">o sistema nao so acha textos parecidos; ele monta evidencias conectadas para uma resposta operacional.</text>
+</svg>

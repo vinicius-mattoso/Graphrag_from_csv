@@ -4,10 +4,13 @@ Esta pasta explica como cada script participa da arquitetura GraphRAG local.
 
 ## Arquitetura e componentes
 
+- [infographic_pipeline_executive.svg](infographic_pipeline_executive.svg): infografico executivo do pipeline.
+- [infographic_question_retrieval.svg](infographic_question_retrieval.svg): infografico da recuperacao por subgrafo usando a pergunta de exemplo.
 - [graphrag_flow.svg](graphrag_flow.svg): diagrama visual do fluxo completo.
 - [architecture.md](architecture.md): arquitetura completa do metodo.
 - [ontology.md](ontology.md): ontologia, tipos de nos e relacionamentos.
 - [graph_builder.md](graph_builder.md): transformacao dos CSVs em grafo e documentos.
+- [document_generation_from_csv.md](document_generation_from_csv.md): explicacao passo a passo de como linhas CSV viram documentos para RAG.
 - [vector_store.md](vector_store.md): Chroma, embeddings e GraphRetriever.
 
 ## Papel de cada script

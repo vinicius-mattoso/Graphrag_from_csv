@@ -4,7 +4,11 @@ O Metodo 01 implementa um GraphRAG local e didatico com LangChain. A ideia e
 separar claramente a construcao do grafo, a indexacao vetorial e a geracao de
 respostas.
 
-Diagrama visual: [graphrag_flow.svg](graphrag_flow.svg)
+Materiais visuais:
+
+- [infographic_pipeline_executive.svg](infographic_pipeline_executive.svg)
+- [infographic_question_retrieval.svg](infographic_question_retrieval.svg)
+- [graphrag_flow.svg](graphrag_flow.svg)
 
 ## Visao geral
 

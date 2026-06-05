@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Infografico executivo do pipeline GraphRAG</title>
+  <desc id="desc">Pipeline executivo mostrando como CSVs viram conhecimento conectado, recuperacao por subgrafo e resposta com fontes.</desc>
+  <defs>
+    <style>
+      .bg { fill: #fbfaf7; }
+      .title { font: 700 44px Arial, sans-serif; fill: #111827; }
+      .subtitle { font: 400 21px Arial, sans-serif; fill: #4b5563; }
+      .eyebrow { font: 700 13px Arial, sans-serif; fill: #64748b; letter-spacing: 2px; }
+      .h2 { font: 700 24px Arial, sans-serif; fill: #111827; }
+      .h3 { font: 700 18px Arial, sans-serif; fill: #111827; }
+      .txt { font: 400 15px Arial, sans-serif; fill: #374151; }
+      .small { font: 400 13px Arial, sans-serif; fill: #64748b; }
+      .chip { font: 700 12px Arial, sans-serif; fill: #1f2937; }
+      .metric { font: 700 30px Arial, sans-serif; fill: #111827; }
+      .metric-label { font: 400 12px Arial, sans-serif; fill: #64748b; }
+      .card { fill: #ffffff; stroke: #e5e7eb; stroke-width: 1.4; }
+      .card-blue { fill: #eff6ff; stroke: #bfdbfe; stroke-width: 1.6; }
+      .card-green { fill: #ecfdf5; stroke: #bbf7d0; stroke-width: 1.6; }
+      .card-orange { fill: #fff7ed; stroke: #fed7aa; stroke-width: 1.6; }
+      .card-gray { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1.4; }
+      .line { stroke: #cbd5e1; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .line-strong { stroke: #334155; stroke-width: 2.4; fill: none; marker-end: url(#arrow-dark); }
+      .line-dash { stroke: #94a3b8; stroke-width: 2; fill: none; stroke-dasharray: 6 7; marker-end: url(#arrow-soft); }
+      .node { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.7; }
+      .node-green { fill: #dcfce7; stroke: #16a34a; stroke-width: 1.8; }
+      .node-blue { fill: #dbeafe; stroke: #2563eb; stroke-width: 1.8; }
+      .node-orange { fill: #ffedd5; stroke: #ea580c; stroke-width: 1.8; }
+    </style>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.09"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arrow-dark" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrow-soft" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="900"/>
+
+  <text class="eyebrow" x="80" y="70">GRAPHRAG FROM CSV - METHOD 01</text>
+  <text class="title" x="80" y="124">CSV vira conhecimento conectado</text>
+  <text class="subtitle" x="80" y="160">O vector store encontra sinais. O grafo organiza o contexto. A LLM responde com base conectada.</text>
+
+  <rect class="card" x="1120" y="58" width="390" height="128" rx="22" filter="url(#shadow)"/>
+  <text class="h3" x="1150" y="94">Resultado esperado</text>
+  <text class="txt" x="1150" y="126">Perguntas operacionais recebem respostas</text>
+  <text class="txt" x="1150" y="150">com fontes, relacoes e contexto tecnico.</text>
+
+  <rect class="card" x="80" y="235" width="240" height="210" rx="24" filter="url(#shadow)"/>
+  <text class="eyebrow" x="112" y="275">01 DADOS</text>
+  <text class="h2" x="112" y="314">CSVs brutos</text>
+  <text class="txt" x="112" y="350">Ativos, falhas, pecas,</text>
+  <text class="txt" x="112" y="374">estoque, fornecedores e</text>
+  <text class="txt" x="112" y="398">ordens de servico.</text>
+  <rect class="card-gray" x="112" y="414" width="82" height="32" rx="16"/>
+  <text class="chip" x="134" y="435">6 CSVs</text>
+
+  <rect class="card-green" x="380" y="235" width="265" height="210" rx="24" filter="url(#shadow)"/>
+  <text class="eyebrow" x="412" y="275">02 GRAFO</text>
+  <text class="h2" x="412" y="314">Ontologia + joins</text>
+  <text class="txt" x="412" y="350">Define entidades, chaves</text>
+  <text class="txt" x="412" y="374">e relacoes confirmadas</text>
+  <text class="txt" x="412" y="398">ou inferidas.</text>
+  <rect class="card" x="412" y="414" width="90" height="32" rx="16"/>
+  <text class="chip" x="431" y="435">34 nos</text>
+  <rect class="card" x="510" y="414" width="105" height="32" rx="16"/>
+  <text class="chip" x="528" y="435">55 arestas</text>
+
+  <rect class="card" x="705" y="235" width="260" height="210" rx="24" filter="url(#shadow)"/>
+  <text class="eyebrow" x="737" y="275">03 CONTEUDO</text>
+  <text class="h2" x="737" y="314">Documentos</text>
+  <text class="txt" x="737" y="350">Cada no relevante ganha</text>
+  <text class="txt" x="737" y="374">texto e metadados para</text>
+  <text class="txt" x="737" y="398">recuperacao conectada.</text>
+  <rect class="card-gray" x="737" y="414" width="125" height="32" rx="16"/>
+  <text class="chip" x="758" y="435">41 documentos</text>
+
+  <rect class="card-blue" x="1025" y="235" width="245" height="210" rx="24" filter="url(#shadow)"/>
+  <text class="eyebrow" x="1057" y="275">04 SINAL</text>
+  <text class="h2" x="1057" y="314">Vector store</text>
+  <text class="txt" x="1057" y="350">Embeddings encontram</text>
+  <text class="txt" x="1057" y="374">documentos parecidos</text>
+  <text class="txt" x="1057" y="398">com a pergunta.</text>
+  <rect class="card" x="1057" y="414" width="92" height="32" rx="16"/>
+  <text class="chip" x="1079" y="435">Chroma</text>
+
+  <rect class="card-orange" x="1330" y="235" width="190" height="210" rx="24" filter="url(#shadow)"/>
+  <text class="eyebrow" x="1362" y="275">05 ACAO</text>
+  <text class="h2" x="1362" y="314">Resposta</text>
+  <text class="txt" x="1362" y="350">A LLM recebe um</text>
+  <text class="txt" x="1362" y="374">subgrafo relevante</text>
+  <text class="txt" x="1362" y="398">e cita fontes.</text>
+  <rect class="card" x="1362" y="414" width="106" height="32" rx="16"/>
+  <text class="chip" x="1382" y="435">Q&amp;A</text>
+
+  <path class="line-strong" d="M320 340 H380"/>
+  <path class="line-strong" d="M645 340 H705"/>
+  <path class="line-strong" d="M965 340 H1025"/>
+  <path class="line-strong" d="M1270 340 H1330"/>
+
+  <rect class="card" x="170" y="545" width="1260" height="255" rx="30" filter="url(#shadow)"/>
+  <text class="h2" x="220" y="590">Como a recuperacao muda</text>
+  <text class="subtitle" x="220" y="624">RAG comum para no primeiro top-k. GraphRAG usa o top-k como ponto de partida e expande por relacoes.</text>
+
+  <circle class="node-blue" cx="310" cy="705" r="45"/>
+  <text class="h3" x="274" y="700">Busca</text>
+  <text class="small" x="267" y="722">vetorial</text>
+
+  <circle class="node-green" cx="540" cy="705" r="45"/>
+  <text class="h3" x="506" y="700">Grafo</text>
+  <text class="small" x="495" y="722">conecta</text>
+
+  <circle class="node-green" cx="770" cy="705" r="45"/>
+  <text class="h3" x="733" y="700">Subgrafo</text>
+  <text class="small" x="728" y="722">reduz ruido</text>
+
+  <circle class="node-orange" cx="1000" cy="705" r="45"/>
+  <text class="h3" x="972" y="700">LLM</text>
+  <text class="small" x="953" y="722">sintetiza</text>
+
+  <circle class="node-orange" cx="1230" cy="705" r="45"/>
+  <text class="h3" x="1193" y="700">Fontes</text>
+  <text class="small" x="1189" y="722">auditaveis</text>
+
+  <path class="line" d="M355 705 H495"/>
+  <path class="line" d="M585 705 H725"/>
+  <path class="line" d="M815 705 H955"/>
+  <path class="line" d="M1045 705 H1185"/>
+
+  <rect class="card-gray" x="220" y="755" width="1030" height="34" rx="17"/>
+  <text class="small" x="250" y="777">Exemplo de conexoes: pergunta -> falha -> ordem de servico -> classe do ativo -> pecas candidatas -> estoque e fornecedor.</text>
+
+  <text class="small" x="80" y="862">Metodo 01 - GraphRAG local com LangChain | CSVs industriais, grafo explicito e resposta com fontes</text>
+</svg>

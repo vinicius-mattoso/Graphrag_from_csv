@@ -68,6 +68,35 @@ with right:
         st.dataframe(count_by(edges, "type"), use_container_width=True, hide_index=True)
 
 st.divider()
+
+st.subheader("Infograficos executivos")
+info_tab_1, info_tab_2 = st.tabs(["Pipeline", "Pergunta e subgrafo"])
+
+with info_tab_1:
+    infographic_path = (
+        PROJECT_ROOT
+        / "method_01"
+        / "docs"
+        / "infographic_pipeline_executive.svg"
+    )
+    if infographic_path.exists():
+        st.image(str(infographic_path), use_container_width=True)
+    else:
+        st.warning("Infografico do pipeline nao encontrado.")
+
+with info_tab_2:
+    question_infographic_path = (
+        PROJECT_ROOT
+        / "method_01"
+        / "docs"
+        / "infographic_question_retrieval.svg"
+    )
+    if question_infographic_path.exists():
+        st.image(str(question_infographic_path), use_container_width=True)
+    else:
+        st.warning("Infografico da pergunta nao encontrado.")
+
+st.divider()
 st.subheader("Como usar")
 st.code(
     "streamlit run app_method_01/Home.py\n"
