@@ -11,6 +11,7 @@ relacionamentos e possiveis pontas soltas.
 - `data/raw`: arquivos CSV originais.
 - `data/processed`: espaco reservado para artefatos derivados.
 - `method_01`: espaco reservado para a abordagem com LangChain.
+- `method_02`: abordagem com Neo4j, Cypher e vector index.
 
 ## Revisao dos dados
 
@@ -54,4 +55,17 @@ Explore pelo app Streamlit:
 
 ```powershell
 streamlit run app_method_01/Home.py
+```
+
+## Metodo 02: Neo4j + Cypher + Vector Index
+
+A segunda implementacao esta em [method_02](method_02/README.md).
+
+Ela persiste o grafo no Neo4j e combina Neo4j Vector Index com consultas Cypher
+controladas para recuperar subgrafos antes da resposta da LLM.
+
+```powershell
+python -m method_02.script_ingestion --reset
+python -m method_02.script_inspection
+python -m method_02.script_ask "quais pecas podem ajudar em queda de pressao no compressor?" --show-context
 ```

@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Fluxo executivo da pergunta no Metodo 02</title>
+  <desc id="desc">Diagrama mostrando como uma pergunta sobre queda de pressao no compressor passa por vector search, sementes, Cypher, subgrafo Neo4j e resposta final.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .header { fill: #0f172a; font: 700 30px Arial, sans-serif; }
+      .subtitle { fill: #475569; font: 400 16px Arial, sans-serif; }
+      .label { fill: #0f172a; font: 700 18px Arial, sans-serif; }
+      .small { fill: #334155; font: 400 14px Arial, sans-serif; }
+      .tiny { fill: #475569; font: 400 12px Arial, sans-serif; }
+      .metric { fill: #0f172a; font: 700 15px Arial, sans-serif; }
+      .blue { fill: #eff6ff; stroke: #2563eb; }
+      .green { fill: #ecfdf5; stroke: #059669; }
+      .amber { fill: #fffbeb; stroke: #d97706; }
+      .red { fill: #fef2f2; stroke: #dc2626; }
+      .purple { fill: #f5f3ff; stroke: #7c3aed; }
+      .gray { fill: #f1f5f9; stroke: #64748b; }
+      .arrow { stroke: #334155; stroke-width: 2.4; fill: none; marker-end: url(#arrowhead); }
+      .thinArrow { stroke: #64748b; stroke-width: 1.8; fill: none; marker-end: url(#arrowheadSmall); }
+      .dash { stroke: #94a3b8; stroke-width: 1.6; stroke-dasharray: 6 6; fill: none; marker-end: url(#arrowheadSmall); }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L12,5 L0,10 Z" fill="#334155" />
+    </marker>
+    <marker id="arrowheadSmall" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="900" />
+
+  <text x="70" y="62" class="header">Metodo 02 - Como a pergunta vira uma resposta auditavel</text>
+  <text x="70" y="92" class="subtitle">Caso testado: "quais pecas podem ajudar em queda de pressao no compressor?"</text>
+
+  <rect x="70" y="130" width="245" height="145" class="panel blue" rx="8" />
+  <text x="95" y="168" class="label">1. Pergunta</text>
+  <text x="95" y="202" class="small">Usuario pede pecas para</text>
+  <text x="95" y="224" class="small">queda de pressao em</text>
+  <text x="95" y="246" class="small">compressor.</text>
+
+  <rect x="390" y="130" width="245" height="145" class="panel green" rx="8" />
+  <text x="415" y="168" class="label">2. Busca vetorial</text>
+  <text x="415" y="202" class="small">Neo4j Vector Index</text>
+  <text x="415" y="224" class="small">encontra documentos</text>
+  <text x="415" y="246" class="small">semanticamente proximos.</text>
+
+  <rect x="710" y="130" width="245" height="145" class="panel amber" rx="8" />
+  <text x="735" y="168" class="label">3. Sementes</text>
+  <text x="735" y="202" class="small">F-QUEDA_PRESSAO</text>
+  <text x="735" y="224" class="small">COMPRESSOR_AR</text>
+  <text x="735" y="246" class="small">WO-1003, P-003, P-006</text>
+
+  <rect x="1030" y="130" width="300" height="145" class="panel purple" rx="8" />
+  <text x="1055" y="168" class="label">4. Cypher controlado</text>
+  <text x="1055" y="202" class="small">Consulta o grafo Neo4j</text>
+  <text x="1055" y="224" class="small">sem deixar a LLM escrever</text>
+  <text x="1055" y="246" class="small">Cypher livremente.</text>
+
+  <path class="arrow" d="M315 202 L382 202" />
+  <path class="arrow" d="M635 202 L702 202" />
+  <path class="arrow" d="M955 202 L1022 202" />
+
+  <rect x="70" y="345" width="1260" height="245" class="panel" rx="8" />
+  <text x="95" y="382" class="label">5. Subgrafo relevante no Neo4j</text>
+  <text x="95" y="410" class="small">O grafo conecta falha, ordem de servico, ativo, classe tecnica, pecas, estoque e fornecedor.</text>
+
+  <rect x="115" y="450" width="170" height="72" class="panel red" rx="8" />
+  <text x="138" y="481" class="metric">F-QUEDA_PRESSAO</text>
+  <text x="138" y="504" class="tiny">Queda de pressao</text>
+
+  <rect x="350" y="450" width="150" height="72" class="panel gray" rx="8" />
+  <text x="388" y="481" class="metric">WO-1003</text>
+  <text x="374" y="504" class="tiny">Ordem fechada</text>
+
+  <rect x="565" y="450" width="170" height="72" class="panel blue" rx="8" />
+  <text x="613" y="481" class="metric">A-200</text>
+  <text x="592" y="504" class="tiny">Compressor de ar 01</text>
+
+  <rect x="800" y="450" width="170" height="72" class="panel amber" rx="8" />
+  <text x="823" y="481" class="metric">COMPRESSOR_AR</text>
+  <text x="835" y="504" class="tiny">Classe tecnica</text>
+
+  <rect x="1035" y="420" width="220" height="64" class="panel green" rx="8" />
+  <text x="1077" y="449" class="metric">P-003</text>
+  <text x="1067" y="471" class="tiny">Filtro coalescente 1pol</text>
+
+  <rect x="1035" y="512" width="220" height="64" class="panel green" rx="8" />
+  <text x="1077" y="541" class="metric">P-006</text>
+  <text x="1064" y="563" class="tiny">Valvula retencao DN50</text>
+
+  <path class="thinArrow" d="M285 486 L342 486" />
+  <text x="293" y="472" class="tiny">HAS_FAILURE</text>
+  <path class="thinArrow" d="M500 486 L557 486" />
+  <text x="510" y="472" class="tiny">FOR_ASSET</text>
+  <path class="thinArrow" d="M735 486 L792 486" />
+  <text x="746" y="472" class="tiny">HAS_CLASS</text>
+  <path class="thinArrow" d="M970 466 C995 452,1008 452,1027 452" />
+  <text x="980" y="435" class="tiny">COMPATIBLE_WITH</text>
+  <path class="thinArrow" d="M970 500 C995 532,1008 544,1027 544" />
+
+  <rect x="70" y="635" width="400" height="155" class="panel green" rx="8" />
+  <text x="95" y="672" class="label">6. Resposta final</text>
+  <text x="95" y="708" class="small">Recomenda P-003 e P-006</text>
+  <text x="95" y="730" class="small">porque atacam a causa raiz:</text>
+  <text x="95" y="752" class="small">filtro saturado, valvula</text>
+  <text x="95" y="774" class="small">desgastada ou vazamento.</text>
+
+  <rect x="515" y="635" width="380" height="155" class="panel amber" rx="8" />
+  <text x="540" y="672" class="label">Evidencias operacionais</text>
+  <text x="540" y="708" class="small">P-003: estoque 1, minimo 3</text>
+  <text x="540" y="730" class="small">P-006: estoque 0, minimo 2</text>
+  <text x="540" y="752" class="small">Fornecedores: Gamma e Omega</text>
+  <text x="540" y="774" class="small">Criticidade alta nas duas pecas</text>
+
+  <rect x="940" y="635" width="390" height="155" class="panel red" rx="8" />
+  <text x="965" y="672" class="label">Ponto de atencao</text>
+  <text x="965" y="708" class="small">O contexto do teste inclui linhas</text>
+  <text x="965" y="730" class="small">fora do recorte de compressor.</text>
+  <text x="965" y="752" class="small">Para producao, refine o Cypher</text>
+  <text x="965" y="774" class="small">para reduzir ruido antes da LLM.</text>
+
+  <path class="arrow" d="M1180 275 L1180 332 C1180 340 1172 345 1164 345 L1130 345" />
+  <path class="arrow" d="M700 590 L700 625" />
+  <path class="dash" d="M720 590 C920 610,1030 620,1120 635" />
+
+  <text x="70" y="842" class="subtitle">Mensagem executiva: o Metodo 02 nao apenas procura texto parecido. Ele usa o grafo para justificar a recomendacao com IDs, relacoes, estoque e fornecedores.</text>
+</svg>

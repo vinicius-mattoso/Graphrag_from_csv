@@ -7,6 +7,10 @@ langchain-openai
 langchain-chroma
 langchain-graph-retriever[chroma]
 
+# Neo4j GraphRAG method
+neo4j
+langchain-neo4j
+
 # OpenAI embeddings/tokenization helpers
 tiktoken
 
