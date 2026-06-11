@@ -2,6 +2,20 @@
 
 O Metodo 03 e a evolucao natural do Metodo 02.
 
+Documentos complementares:
+
+- [architecture.md](docs/architecture.md): arquitetura e componentes do Metodo 03.
+- [explanation_monolito.md](docs/explanation_monolito.md): explicacao do monolito
+  didatico.
+- [explanation.md](docs/explanation.md): como a versao LangChain valida Cypher antes
+  do Neo4j.
+- [explanation_tech_Langhcain.md](docs/explanation_tech_Langhcain.md):
+  pipeline tecnico da engine LangChain.
+- [explanation_tech_Custom.md](docs/explanation_tech_Custom.md): pipeline
+  tecnico da engine custom.
+- [explanation_langchain_raw.md](docs/explanation_langchain_raw.md): explicacao
+  do monolito LangChain puro, sem guardrails locais.
+
 No Metodo 02, a recuperacao usa Cypher controlado e predefinido. A LLM nao
 escreve consultas Cypher; ela apenas recebe o contexto recuperado do Neo4j e
 gera a resposta final.
@@ -39,8 +53,9 @@ LLM gera resposta final com evidencias
 | `method_02` | Vector search + Cypher fixo/controlado | A LLM nao cria Cypher |
 | `method_03` | Text2Cypher validado + Neo4j | A LLM propoe Cypher, mas nao executa diretamente |
 
-O Metodo 03 nao substitui a ingestao do Metodo 02. Ele deve consultar o mesmo
-grafo Neo4j ja carregado com nos, arestas, documentos e embeddings.
+O Metodo 03 pode consultar um grafo Neo4j ja carregado, mas tambem possui uma
+ingestao propria simples para facilitar o estudo do fluxo completo neste
+repositorio.
 
 ## Por que usar Text2Cypher?
 
@@ -104,16 +119,17 @@ quais pecas estao abaixo do estoque minimo?
 Cypher esperado:
 
 ```cypher
-MATCH (p:Part)-[:STOCKED_AT]->(w:Warehouse)
-WHERE w.stock_on_hand < w.min_stock
+MATCH (p:Part)-[stock:STOCKED_AT]->(w:Warehouse)
+WHERE stock.stock_on_hand < stock.min_stock
 RETURN
   p.part_id AS part_id,
   p.part_name AS part_name,
+  p.criticality AS criticality,
   w.warehouse AS warehouse,
-  w.stock_on_hand AS stock_on_hand,
-  w.min_stock AS min_stock,
-  w.reorder_point AS reorder_point
-ORDER BY w.stock_on_hand ASC, part_id
+  stock.stock_on_hand AS stock_on_hand,
+  stock.min_stock AS min_stock,
+  stock.reorder_point AS reorder_point
+ORDER BY stock.stock_on_hand ASC, part_id
 LIMIT 50
 ```
 
@@ -182,6 +198,10 @@ O Metodo 03 tambem deve usar um usuario Neo4j com permissao somente leitura.
 Assim, mesmo que uma query perigosa passe por erro de validacao, o banco ainda
 bloqueia alteracoes.
 
+O `script_ask` usa `NEO4J_READ_USERNAME` e `NEO4J_READ_PASSWORD` quando essas
+variaveis existem. Se elas nao forem definidas, ele usa `NEO4J_USERNAME` e
+`NEO4J_PASSWORD`.
+
 Regra pratica:
 
 ```text
@@ -203,6 +223,20 @@ O banco protege.
 
 ## Interface sugerida
 
+Ingerir os CSVs no Neo4j:
+
+```powershell
+python -m method_03.script_ingestion --reset
+```
+
+Inspecionar o grafo:
+
+```powershell
+python -m method_03.script_inspection
+```
+
+Perguntar usando Text2Cypher validado:
+
 ```powershell
 python -m method_03.script_ask "quais pecas estao abaixo do estoque minimo?" --show-cypher
 ```
@@ -215,6 +249,29 @@ Flags uteis:
 --dry-run       Gera e valida a query, mas nao executa.
 --max-rows 50   Limita a quantidade de linhas retornadas.
 ```
+
+Versao monolitica e didatica:
+
+```powershell
+python -m method_03.monolith "quais pecas estao abaixo do estoque minimo?" --reset
+```
+
+Por padrao, o monolito usa `langchain_neo4j.GraphCypherQAChain` para mostrar
+como o framework pronto faz Text2Cypher. Para comparar com a implementacao local:
+
+```powershell
+python -m method_03.monolith "quais pecas estao abaixo do estoque minimo?" --reset --engine custom
+```
+
+Monolito LangChain puro, sem os guardrails locais do projeto:
+
+```powershell
+python -m method_03.monolith_langchain_raw "quais pecas estao abaixo do estoque minimo?" --reset
+```
+
+Esse script existe apenas para estudar as capacidades nativas do
+`GraphCypherQAChain`. Ele nao usa `validator.py` nem o wrapper
+`ValidatedNeo4jGraph`.
 
 ## Limites da abordagem
 

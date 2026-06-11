@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="920" viewBox="0 0 1400 920" role="img" aria-labelledby="title desc">
+  <title id="title">Metodo 03 monolito com GraphCypherQAChain</title>
+  <desc id="desc">Fluxo visual do monolito usando langchain_neo4j GraphCypherQAChain, com validacao local antes da execucao no Neo4j.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { fill: #0f172a; font: 700 30px Arial, sans-serif; }
+      .subtitle { fill: #475569; font: 400 16px Arial, sans-serif; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .blue { fill: #eff6ff; stroke: #2563eb; }
+      .green { fill: #ecfdf5; stroke: #059669; }
+      .amber { fill: #fffbeb; stroke: #d97706; }
+      .purple { fill: #f5f3ff; stroke: #7c3aed; }
+      .red { fill: #fef2f2; stroke: #dc2626; }
+      .gray { fill: #f1f5f9; stroke: #64748b; }
+      .label { fill: #0f172a; font: 700 18px Arial, sans-serif; }
+      .small { fill: #334155; font: 400 14px Arial, sans-serif; }
+      .tiny { fill: #475569; font: 400 12px Arial, sans-serif; }
+      .code { fill: #0f172a; font: 400 13px Consolas, monospace; }
+      .codeBold { fill: #0f172a; font: 700 13px Consolas, monospace; }
+      .arrow { stroke: #334155; stroke-width: 2.3; fill: none; marker-end: url(#arrowhead); }
+      .thinArrow { stroke: #64748b; stroke-width: 1.8; fill: none; marker-end: url(#arrowheadSmall); }
+      .dash { stroke: #94a3b8; stroke-width: 1.7; stroke-dasharray: 6 6; fill: none; marker-end: url(#arrowheadSmall); }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L12,5 L0,10 Z" fill="#334155" />
+    </marker>
+    <marker id="arrowheadSmall" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="920" />
+  <text x="70" y="60" class="title">Monolito Metodo 03 - resposta com LangChain</text>
+  <text x="70" y="90" class="subtitle">Engine padrao: GraphCypherQAChain gera Cypher e resposta; o projeto intercepta a query antes do Neo4j.</text>
+
+  <rect x="70" y="125" width="245" height="122" class="panel blue" rx="8" />
+  <text x="95" y="160" class="label">1. Entrada</text>
+  <text x="95" y="193" class="small">Pergunta do usuario</text>
+  <text x="95" y="216" class="code">"pecas abaixo do</text>
+  <text x="95" y="235" class="code">estoque minimo?"</text>
+
+  <rect x="375" y="125" width="280" height="122" class="panel gray" rx="8" />
+  <text x="400" y="160" class="label">2. Grafo preparado</text>
+  <text x="400" y="193" class="small">CSV -&gt; graph_builder</text>
+  <text x="400" y="216" class="small">Neo4j com Part, Warehouse,</text>
+  <text x="400" y="238" class="small">STOCKED_AT e demais relacoes.</text>
+
+  <rect x="715" y="125" width="280" height="122" class="panel purple" rx="8" />
+  <text x="740" y="160" class="label">3. LangChain</text>
+  <text x="740" y="193" class="small">GraphCypherQAChain recebe</text>
+  <text x="740" y="216" class="small">schema filtrado + exemplos</text>
+  <text x="740" y="238" class="small">e gera Cypher.</text>
+
+  <rect x="1055" y="125" width="275" height="122" class="panel amber" rx="8" />
+  <text x="1080" y="160" class="label">4. Guardrail local</text>
+  <text x="1080" y="193" class="small">ValidatedNeo4jGraph.query()</text>
+  <text x="1080" y="216" class="small">chama validator.py antes</text>
+  <text x="1080" y="238" class="small">da execucao.</text>
+
+  <path class="arrow" d="M315 186 L367 186" />
+  <path class="arrow" d="M655 186 L707 186" />
+  <path class="arrow" d="M995 186 L1047 186" />
+
+  <rect x="70" y="305" width="590" height="245" class="panel" rx="8" />
+  <text x="95" y="342" class="label">Cypher gerado pelo framework</text>
+  <text x="95" y="375" class="code">MATCH (p:Part)-[stock:STOCKED_AT]-&gt;(w:Warehouse)</text>
+  <text x="95" y="397" class="code">WHERE stock.stock_on_hand &lt; stock.min_stock</text>
+  <text x="95" y="419" class="code">RETURN p.part_id, p.part_name, w.warehouse,</text>
+  <text x="95" y="441" class="code">       stock.stock_on_hand, stock.min_stock</text>
+  <text x="95" y="463" class="code">ORDER BY stock.stock_on_hand ASC</text>
+  <text x="95" y="485" class="codeBold">LIMIT 50</text>
+  <text x="95" y="522" class="tiny">A chain gera a consulta; o wrapper local decide se ela pode executar.</text>
+
+  <rect x="740" y="305" width="590" height="245" class="panel red" rx="8" />
+  <text x="765" y="342" class="label">Validacao antes do banco</text>
+  <text x="765" y="375" class="small">Bloqueia escrita: CREATE, MERGE, DELETE, SET, DROP.</text>
+  <text x="765" y="402" class="small">Bloqueia CALL/APOC, comentarios, ponto e virgula.</text>
+  <text x="765" y="429" class="small">Confere labels, relacionamentos e propriedades.</text>
+  <text x="765" y="456" class="small">Exige LIMIT e schema conhecido da ontologia.</text>
+  <text x="765" y="498" class="codeBold">Validacao: OK</text>
+  <text x="765" y="524" class="tiny">Se falhar, o Cypher nao chega ao Neo4j.</text>
+
+  <path class="thinArrow" d="M660 428 L732 428" />
+
+  <rect x="70" y="610" width="390" height="205" class="panel green" rx="8" />
+  <text x="95" y="647" class="label">Resultado Neo4j</text>
+  <text x="95" y="680" class="code">P-006 | estoque 0 | min 2</text>
+  <text x="95" y="706" class="code">P-003 | estoque 1 | min 3</text>
+  <text x="95" y="732" class="code">P-001 | estoque 3 | min 5</text>
+  <text x="95" y="770" class="tiny">Linhas estruturadas viram contexto da resposta.</text>
+
+  <rect x="505" y="610" width="390" height="205" class="panel purple" rx="8" />
+  <text x="530" y="647" class="label">QA do LangChain</text>
+  <text x="530" y="680" class="small">GraphCypherQAChain usa o resultado</text>
+  <text x="530" y="704" class="small">para redigir a resposta final.</text>
+  <text x="530" y="742" class="tiny">O caminho fica compacto: uma chain gera</text>
+  <text x="530" y="762" class="tiny">Cypher, consulta e responde.</text>
+
+  <rect x="940" y="610" width="390" height="205" class="panel blue" rx="8" />
+  <text x="965" y="647" class="label">Resposta final</text>
+  <text x="965" y="680" class="small">Lista pecas abaixo do minimo,</text>
+  <text x="965" y="704" class="small">com ID, nome, almoxarifado,</text>
+  <text x="965" y="728" class="small">estoque atual e estoque minimo.</text>
+  <text x="965" y="770" class="tiny">Boa para demonstrar framework pronto com seguranca extra.</text>
+
+  <path class="arrow" d="M1035 550 C1035 585, 265 575, 265 602" />
+  <path class="arrow" d="M460 712 L497 712" />
+  <path class="arrow" d="M895 712 L932 712" />
+
+  <rect x="70" y="852" width="1260" height="42" class="panel gray" rx="8" />
+  <text x="95" y="878" class="small">Mensagem principal: o LangChain acelera o Text2Cypher, mas a execucao continua protegida pelo validador local e por credenciais read-only.</text>
+</svg>

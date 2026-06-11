@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="960" viewBox="0 0 1400 960" role="img" aria-labelledby="title desc">
+  <title id="title">Metodo 03 monolito com engine custom</title>
+  <desc id="desc">Fluxo visual do monolito usando os modulos locais text2cypher, validator, neo4j_store e retrieval para gerar resposta.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { fill: #0f172a; font: 700 30px Arial, sans-serif; }
+      .subtitle { fill: #475569; font: 400 16px Arial, sans-serif; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .blue { fill: #eff6ff; stroke: #2563eb; }
+      .green { fill: #ecfdf5; stroke: #059669; }
+      .amber { fill: #fffbeb; stroke: #d97706; }
+      .purple { fill: #f5f3ff; stroke: #7c3aed; }
+      .red { fill: #fef2f2; stroke: #dc2626; }
+      .gray { fill: #f1f5f9; stroke: #64748b; }
+      .label { fill: #0f172a; font: 700 18px Arial, sans-serif; }
+      .small { fill: #334155; font: 400 14px Arial, sans-serif; }
+      .tiny { fill: #475569; font: 400 12px Arial, sans-serif; }
+      .code { fill: #0f172a; font: 400 13px Consolas, monospace; }
+      .codeBold { fill: #0f172a; font: 700 13px Consolas, monospace; }
+      .arrow { stroke: #334155; stroke-width: 2.3; fill: none; marker-end: url(#arrowhead); }
+      .thinArrow { stroke: #64748b; stroke-width: 1.8; fill: none; marker-end: url(#arrowheadSmall); }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L12,5 L0,10 Z" fill="#334155" />
+    </marker>
+    <marker id="arrowheadSmall" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="960" />
+  <text x="70" y="60" class="title">Monolito Metodo 03 - resposta com engine custom</text>
+  <text x="70" y="90" class="subtitle">Engine alternativa: cada etapa aparece separada para explicar exatamente como a resposta foi construida.</text>
+
+  <rect x="70" y="125" width="240" height="118" class="panel blue" rx="8" />
+  <text x="95" y="160" class="label">1. Pergunta</text>
+  <text x="95" y="192" class="code">"pecas abaixo do</text>
+  <text x="95" y="212" class="code">estoque minimo?"</text>
+
+  <rect x="360" y="125" width="240" height="118" class="panel gray" rx="8" />
+  <text x="385" y="160" class="label">2. CSV -&gt; grafo</text>
+  <text x="385" y="192" class="small">build_graph()</text>
+  <text x="385" y="215" class="small">34 nos | 55 arestas</text>
+
+  <rect x="650" y="125" width="240" height="118" class="panel green" rx="8" />
+  <text x="675" y="160" class="label">3. Neo4j</text>
+  <text x="675" y="192" class="small">ingest_graph_to_neo4j()</text>
+  <text x="675" y="215" class="small">source_system=method_03</text>
+
+  <rect x="940" y="125" width="390" height="118" class="panel purple" rx="8" />
+  <text x="965" y="160" class="label">4. text2cypher.py</text>
+  <text x="965" y="192" class="small">Prompt local com schema, regras e exemplos.</text>
+  <text x="965" y="215" class="small">A LLM retorna JSON com Cypher e parametros.</text>
+
+  <path class="arrow" d="M310 184 L352 184" />
+  <path class="arrow" d="M600 184 L642 184" />
+  <path class="arrow" d="M890 184 L932 184" />
+
+  <rect x="70" y="300" width="610" height="218" class="panel" rx="8" />
+  <text x="95" y="337" class="label">Cypher retornado pela engine custom</text>
+  <text x="95" y="370" class="code">MATCH (p:Part)-[stock:STOCKED_AT]-&gt;(w:Warehouse)</text>
+  <text x="95" y="392" class="code">WHERE stock.stock_on_hand &lt; stock.min_stock</text>
+  <text x="95" y="414" class="code">RETURN p.part_id AS part_id, p.part_name AS part_name,</text>
+  <text x="95" y="436" class="code">       p.criticality, w.warehouse, stock.stock_on_hand,</text>
+  <text x="95" y="458" class="code">       stock.min_stock, stock.reorder_point</text>
+  <text x="95" y="480" class="code">ORDER BY stock.stock_on_hand ASC, part_id LIMIT 50</text>
+
+  <rect x="730" y="300" width="600" height="218" class="panel amber" rx="8" />
+  <text x="755" y="337" class="label">5. validator.py</text>
+  <text x="755" y="370" class="small">A query passa por uma etapa visivel de validacao.</text>
+  <text x="755" y="397" class="small">Checa comando proibido, schema, propriedades e LIMIT.</text>
+  <text x="755" y="424" class="small">Como a query so le estoque em STOCKED_AT, ela e aceita.</text>
+  <text x="755" y="470" class="codeBold">Validacao: OK</text>
+
+  <path class="thinArrow" d="M680 409 L722 409" />
+
+  <rect x="70" y="575" width="392" height="220" class="panel green" rx="8" />
+  <text x="95" y="612" class="label">6. neo4j_store.py</text>
+  <text x="95" y="645" class="small">run_read_query() executa a query</text>
+  <text x="95" y="668" class="small">validada e retorna linhas estruturadas.</text>
+  <text x="95" y="706" class="code">P-006 | Valvula | 0 &lt; 2</text>
+  <text x="95" y="730" class="code">P-003 | Filtro  | 1 &lt; 3</text>
+  <text x="95" y="754" class="code">P-001 | Selo    | 3 &lt; 5</text>
+
+  <rect x="505" y="575" width="392" height="220" class="panel purple" rx="8" />
+  <text x="530" y="612" class="label">7. retrieval.py</text>
+  <text x="530" y="645" class="small">generate_answer() envia pergunta,</text>
+  <text x="530" y="668" class="small">Cypher validado e linhas do Neo4j</text>
+  <text x="530" y="691" class="small">para a LLM responder.</text>
+  <text x="530" y="735" class="tiny">A resposta so pode usar o resultado retornado.</text>
+
+  <rect x="940" y="575" width="390" height="220" class="panel blue" rx="8" />
+  <text x="965" y="612" class="label">Resposta explicavel</text>
+  <text x="965" y="645" class="small">As pecas abaixo do estoque minimo sao:</text>
+  <text x="965" y="681" class="code">1. P-006 estoque 0 / min 2</text>
+  <text x="965" y="706" class="code">2. P-003 estoque 1 / min 3</text>
+  <text x="965" y="731" class="code">3. P-001 estoque 3 / min 5</text>
+  <text x="965" y="768" class="tiny">Cada item vem diretamente das linhas do Neo4j.</text>
+
+  <path class="arrow" d="M1030 518 C1030 545, 266 545, 266 567" />
+  <path class="arrow" d="M462 685 L497 685" />
+  <path class="arrow" d="M897 685 L932 685" />
+
+  <rect x="70" y="850" width="610" height="70" class="panel gray" rx="8" />
+  <text x="95" y="883" class="label">Vantagem didatica</text>
+  <text x="95" y="907" class="small">Cada modulo tem uma responsabilidade visivel: gerar, validar, executar e responder.</text>
+
+  <rect x="720" y="850" width="610" height="70" class="panel gray" rx="8" />
+  <text x="745" y="883" class="label">Tradeoff</text>
+  <text x="745" y="907" class="small">Da mais controle e auditoria, mas exige manter prompts, parser e validacao locais.</text>
+</svg>

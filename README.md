@@ -11,6 +11,7 @@ relacionamentos e possiveis pontas soltas.
 - `data/raw`: arquivos CSV originais.
 - `data/processed`: espaco reservado para artefatos derivados.
 - `method_01`: espaco reservado para a abordagem com LangChain.
+- `method_03`: abordagem com Neo4j e Text2Cypher validado.
 
 ## Revisao dos dados
 
@@ -54,4 +55,23 @@ Explore pelo app Streamlit:
 
 ```powershell
 streamlit run app_method_01/Home.py
+```
+
+## Metodo 03: Neo4j + Text2Cypher validado
+
+A terceira implementacao esta em [method_03](method_03/README.md).
+
+Ela carrega o grafo no Neo4j e usa uma LLM para propor Cypher a partir da
+pergunta do usuario. A query gerada passa por validacao antes de ser executada.
+
+```powershell
+python -m method_03.script_ingestion --reset
+python -m method_03.script_inspection
+python -m method_03.script_ask "quais pecas estao abaixo do estoque minimo?" --show-cypher --show-context
+```
+
+Versao monolitica e didatica do fluxo completo:
+
+```powershell
+python -m method_03.monolith "quais pecas estao abaixo do estoque minimo?" --reset
 ```
